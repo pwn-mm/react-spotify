@@ -6,9 +6,16 @@ import { playPause, setActiveSong } from '../redux/features/playerSlice'
 
 const SongCard = ({ song, data, activeSong, isPlaying, i }) => {
 
-  const handlePauseClick = () => { }
+  const dispatch = useDispatch();
 
-  const handlePlayClick = () => { }
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  }
+
+  const handlePlayClick = () => {
+    dispatch(setActiveSong({ song, data, i }));
+    dispatch(playPause(true));
+  }
 
 
   return (

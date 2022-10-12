@@ -87,6 +87,25 @@ To set up a development environment, please follow these steps:
 
     Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Issues
+## Notes
+
+1. useSelectors (Example)
+
+   `select a specific piece of a Cake | state as a Cake`
+
+   CAKE = {
+      slice : MusicPlayer Function
+      slice : ShazamAPI Function
+      choco : Chocolate Function
+      vanilla : Vanilla Function 
+   }
+
+2. useDispatch (Example)
+
+   `allow changes to the Cake`
+
+   DISPATCH (Add Chocolate Powder)
+   DISPATCH (Add Durian Dressing)
+   CAKE -> Selectors(Pieces)
 
 #
