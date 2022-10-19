@@ -13,7 +13,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 
 const TopPlay = () => {
-  // Project reviewed
+  // Project revision
   const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetTopChartsQuery();
