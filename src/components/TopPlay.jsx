@@ -31,7 +31,13 @@ const TopPlay = () => {
         </div>
       </div>
       {/* Play pause component */}
-      <PlayPause />
+      <PlayPause
+        isPlaying={isPlaying}
+        activeSong={activeSong}
+        song={song}
+        handlePause={handlePauseClick}
+        handlePlay={handlePlayClick}
+      />
     </div>
   )
 
@@ -51,7 +57,10 @@ const TopPlay = () => {
     dispatch(playPause(false));
   }
 
-  const handlePlayClick = () => {
+  const handlePlayClick = (song, i) => {
+    //! Err: song is not defined => need to pass 'song' as an parameter
+    // dispatch(setActiveSong({ song, data, i }));
+
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   }
@@ -77,7 +86,7 @@ const TopPlay = () => {
               isPlaying={isPlaying}
               activeSong={activeSong}
               handlePauseClick={handlePauseClick}
-              handlePlayClick={handlePlayClick}
+              handlePlayClick={() => handlePlayClick(song, i)}
             />
           ))}
         </div>
