@@ -25,11 +25,13 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
           )}
 
           {/* Show genre */}
-          <p>
-            
+          <p className='text-base text-gray-400 mt-2'>
+            {artistId ? artist?.genreNames[0] : songData?.genres?.primary}
           </p>
         </div>
       </div>
+
+      <div className='w-full sm:h-44 h-24' /> 
     </div>
   )
 };
