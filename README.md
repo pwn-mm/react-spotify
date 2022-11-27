@@ -6,11 +6,11 @@ Check out the complete project requirements [here](https://docs.google.com/docum
 
 ## Project Status
 
-Developing...
+Completed (27 Nov 2022)
 
 # Project Screen Shot(s)
 
-![Layout]()
+![Layout](https://i.ibb.co/XDpZYbL/music-app.png)
 
 ## Project Live View
 
@@ -89,23 +89,28 @@ To set up a development environment, please follow these steps:
 
 ## Notes
 
-1. useSelectors (Example)
+1. useSelectors (Example)  
+   &nbsp;
 
-   `select a specific piece of a Cake | state as a Cake`
+   `select a specific piece of a Cake | state as a Cake` 
+   &nbsp;
 
-   CAKE = {
-      slice : MusicPlayer Function
-      slice : ShazamAPI Function
-      choco : Chocolate Function
-      vanilla : Vanilla Function 
-   }
+      CAKE = {
+         slice : MusicPlayer Function
+         slice : ShazamAPI Function
+         choco : Chocolate Function
+         vanilla : Vanilla Function 
+      }
+   &nbsp;
 
 2. useDispatch (Example)
+   &nbsp;
 
    `allow changes to the Cake`
+   &nbsp;
 
-   DISPATCH (Add Chocolate Powder)
-   DISPATCH (Add Durian Dressing)
+   DISPATCH (Add Chocolate Powder) 
+   DISPATCH (Add Durian Dressing) 
    CAKE -> Selectors(Pieces)
 
 #
