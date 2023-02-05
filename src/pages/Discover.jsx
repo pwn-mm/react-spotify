@@ -5,12 +5,10 @@
  * That's why 'useDispatch' and 'useSelector' hooks are imported.
  */
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Error, Loader, SongCard } from '../components';
 import { genres } from '../assets/constants'
 import { selectGenreListId } from '../redux/features/playerSlice';
 import { useGetSongsByGenreQuery } from '../redux/services/shazamCore';
-
 
 // ? dispatch ->   dispatch an action to the store ->  genre
 // ? selector ->   fetch modified state

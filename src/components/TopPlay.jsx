@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from "swiper";
+import Loader from './Loader'
 
 import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
@@ -19,25 +20,44 @@ const TopPlay = () => {
     <div className="w-full flex flex-row items-center hover:bg-[#4c4268] py-2 p-4 rounded-lg cursor-pointer mb-2">
       <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>
       <div className="flex-1 flex flex-row justify-between items-center">
-        <img src={song?.images.coverart} alt={song?.title} className="w-20 h-20 rounded-lg" />
+        {/* {console.log(song)} */}
+        {song?.artists ? (
+          <img src={song?.images?.coverart} alt={song?.title} className="w-20 h-20 rounded-lg" />
+        ) : (
+          <img src={song?.hub?.image} alt={song?.title} className="w-20 h-20 rounded-lg" />
+        )}
         {/* This div contains 2 links */}
         <div className="flex-1 flex flex-col justify-center mx-3">
-          <Link to={`/songs/${song?.key}`}>
-            <p className="font-bold text-xl text-white">{song?.title}</p>
-          </Link>
-          <Link to={`/artists/${song?.artists[0].adamid}`}>
-            <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
-          </Link>
+          {song?.artists ? (
+            <Link to={`/songs/${song?.key}`}>
+              <p className="font-bold text-xl text-white">{song?.title}</p>
+            </Link>
+          ) : (
+            <Link to={`/top-charts`}>
+              <p className="font-bold text-xl text-white">{song?.title}</p>
+            </Link>
+          )}
+          {song?.artists && song?.artists[0]?.adamid ? (
+            <Link to={`/artists/${song?.artists[0]?.adamid}` ?? null}>
+              <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
+            </Link>
+          ) : (
+            <Link to={`/top-artists` ?? null}>
+              <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
+            </Link>
+          )}
         </div>
       </div>
       {/* Play pause component */}
-      <PlayPause
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-        song={song}
-        handlePause={handlePauseClick}
-        handlePlay={handlePlayClick}
-      />
+      {song?.artists ? (
+        <PlayPause
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          song={song}
+          handlePause={handlePauseClick}
+          handlePlay={handlePlayClick}
+        />
+      ) : <Loader small/>}
     </div>
   )
 
@@ -52,6 +72,7 @@ const TopPlay = () => {
 
   //Get top songs | only take the first five songs
   const topPlays = data?.slice(0, 5);
+  // console.log(topPlays);
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
@@ -59,8 +80,6 @@ const TopPlay = () => {
 
   const handlePlayClick = (song, i) => {
     //! Err: song is not defined => need to pass 'song' as an parameter
-    // dispatch(setActiveSong({ song, data, i }));
-
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   }
@@ -116,9 +135,15 @@ const TopPlay = () => {
             style={{ width: '25%', height: 'auto' }}
             className="rounded-full shadow-lg animate-slideright"
           >
-            <Link to={`/artists/${song?.artists[0].adamid}`}>
-              <img src={song?.images.background} alt="song image" className="rounded-full w-full object-cover" />
-            </Link>
+            {song?.artists && song?.artists[0]?.adamid ? (
+              <Link to={`/artists/${song?.artists[0].adamid}`}>
+                <img src={song?.images.background} alt="song image" className="rounded-full w-full object-cover" />
+              </Link>
+            ) : (
+              <Link to={`/top-charts`}>
+                <img src={song?.hub?.image} alt="song image" className="rounded-full w-full object-cover" />
+              </Link>
+            )}
           </SwiperSlide>
         ))}
       </Swiper>

@@ -5,6 +5,7 @@ import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice'
 
 const SongCard = ({ song, data, activeSong, isPlaying, i }) => {
+  console.log(song);
 
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ const SongCard = ({ song, data, activeSong, isPlaying, i }) => {
 
 
   return (
-    <div className='flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer'>
+    <div className='flex flex-col w-[250px] p-4 bg-red bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer'>
       {/* song card */}
       <div className='relative w-full h-56 group'>
         {/* check if the song currently showing is the song currently playing */}
@@ -36,16 +37,20 @@ const SongCard = ({ song, data, activeSong, isPlaying, i }) => {
             handlePlay={handlePlayClick}
           />
         </div>
-        <img alt="song_img" src={song.images?.coverart} />
+        {song.artists ? (
+          <img alt="song_img" src={song.images?.coverart} />
+        ) : (
+          <img alt="song_img" src={song?.hub?.image} />
+        )}
       </div>
 
       {/* song title and subtitle */}
       <div className='mt-4 flex flex-col'>
         <p className='font-semibold text-lg text-white truncate'>
-          <Link to={`/songs/${song?.key}`}>{song.title}</Link>
+          <Link to={song.artists ? (`/songs/${song?.key}`) : (`/around-you`)}>{song.title}</Link>
         </p>
         <p className='text-sm truncate text-gray-300 mt-1'>
-          <Link to={song.artists ? `/artists/${song?.artists[0]?.adamid}` : '/topartists'}>{song.subtitle}</Link>
+          <Link to={song.artists ? `/artists/${song?.artists[0]?.adamid}` : '/top-artists'}>{song.subtitle}</Link>
         </p>
       </div>
     </div>
